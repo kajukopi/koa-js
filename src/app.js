@@ -1,69 +1,39 @@
+import {config} from "dotenv"
 import Koa from "koa"
-import Router from "koa-router"
 import bodyParser from "koa-bodyparser"
 import mongoose from "mongoose"
-import render from "koa-hbs"
-
+import hbs from "koa-hbs"
+import routerItem from "./routes/items.js"
+import path from "path"
+import {fileURLToPath} from "url"
+import routerAsset from "./routes/assets.js"
+import routerAuth from "./routes/auth.js"
+config()
 // Initialize Koa application
 const app = new Koa()
-const router = new Router()
 
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/koa-hbs-mongoose-app", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.DATABASE_URL)
 
-// Define a Mongoose schema and model
-const ItemSchema = new mongoose.Schema({
-  name: String,
-  description: String,
-})
-
-const Item = mongoose.model("Item", ItemSchema)
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 // Setup the template engine
 app.use(
-  render({
-    viewPath: "./views",
-    defaultLayout: "main",
+  hbs.middleware({
+    viewPath: path.join(__dirname, "views"),
   })
 )
 
 // Middleware
 app.use(bodyParser())
 
-// Define routes
-router.get("/", async (ctx) => {
-  const items = await Item.find()
-  await ctx.render("index", {items})
-})
-
-router.get("/item/:id", async (ctx) => {
-  const item = await Item.findById(ctx.params.id)
-  if (item) {
-    await ctx.render("item", {item})
-  } else {
-    ctx.status = 404
-    ctx.body = "Item not found"
-  }
-})
-
-router.post("/item", async (ctx) => {
-  const newItem = new Item(ctx.request.body)
-  await newItem.save()
-  ctx.redirect("/")
-})
-
-router.get("/item/delete/:id", async (ctx) => {
-  await Item.findByIdAndDelete(ctx.params.id)
-  ctx.redirect("/")
-})
-
 // Use router middleware
-app.use(router.routes()).use(router.allowedMethods())
+app.use(routerItem.routes()).use(routerItem.allowedMethods())
 
 // Start the server
 app.listen(3000, () => {
   console.log("Server running on http://localhost:3000")
 })
+
+export default app

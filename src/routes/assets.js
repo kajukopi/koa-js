@@ -1,6 +1,6 @@
-const express = require("express")
-const router = express.Router()
-const Asset = require("../models/Asset")
+import Router from "koa-router"
+import Asset from "../models/Asset.js";
+const router = new Router()
 
 // Get all assets
 router.get("/", async (req, res) => {
@@ -33,4 +33,4 @@ router.delete("/:id", async (req, res) => {
   res.status(204).send()
 })
 
-module.exports = router
+export default router

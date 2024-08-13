@@ -1,6 +1,6 @@
-const express = require("express")
-const User = require("../models/User")
-const router = express.Router()
+import Router from "koa-router"
+const router = new Router()
+import User from "../models/User.js"
 
 // Login
 router.post("/login", async (req, res) => {
@@ -47,4 +47,4 @@ router.get("/logout", (req, res) => {
   res.redirect("/login")
 })
 
-module.exports = router
+export default router

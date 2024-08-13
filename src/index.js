@@ -1,9 +1,9 @@
-require("dotenv").config()
-const app = require("./app")
-const http = require("http")
+import {config} from "dotenv"
+import app from "./app.js"
+import {createServer} from "http"
+config()
 const port = normalizePort(process.env.PORT || "3000")
-app.set("port", port)
-const server = http.createServer(app)
+const server = createServer(app.callback()).listen(port)
 server.listen(port, "0.0.0.0")
 server.on("error", onError)
 server.on("listening", onListening)

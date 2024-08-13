@@ -1,7 +1,7 @@
-const mongoose = require("mongoose")
-const bcrypt = require("bcrypt")
+import {Schema, model} from "mongoose"
+import {hash, compare} from "bcrypt"
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
   role: {type: String, enum: ["admin", "staff", "user"], default: "user"},
@@ -10,15 +10,16 @@ const userSchema = new mongoose.Schema({
 // Hash the password before saving the user
 userSchema.pre("save", async function (next) {
   if (this.isModified("password")) {
-    this.password = await bcrypt.hash(this.password, 10)
+    this.password = await hash(this.password, 10)
   }
   next()
 })
 
 // Method to compare passwords
 userSchema.methods.comparePassword = function (candidatePassword) {
-  return bcrypt.compare(candidatePassword, this.password)
+  return compare(candidatePassword, this.password)
 }
 
-const User = mongoose.model("User", userSchema)
-module.exports = User
+const User = model("User", userSchema)
+
+export default User

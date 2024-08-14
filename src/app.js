@@ -29,7 +29,6 @@ const __dirname = path.dirname(__filename)
 app.use(serve(path.join(__dirname, "..", 'assets'),{
   maxage: 1000 * 60 * 60 * 24, // Cache for 1 day
   hidden: false, // Do not serve hidden files
-  index: 'index.html', // Default file to serve
   gzip: true, // Serve gzip versions of files if available
 }));
 

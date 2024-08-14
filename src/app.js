@@ -10,6 +10,7 @@ import Handlebars from "handlebars";
 
 import { logger } from "./middlewares/handler.js"
 
+// Config env
 config()
 
 // Initialize Koa application
@@ -21,13 +22,13 @@ mongoose.connect(process.env.DATABASE_URL)
 // Url Path
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-
 app.use(serve(path.join(__dirname, "..", 'assets'), {
   maxage: 1000 * 60 * 60 * 24,
   hidden: false,
   gzip: true,
 }));
 
+// Set up views with koa-hbs-render
 const options = {
   cacheExpires: 60,
   contentTag: 'content',
@@ -42,14 +43,11 @@ const options = {
   },
   Promise: Promise
 }
-
-// Set up views with koa-hbs-render
 app.use(render(options));
-
 app.use(bodyParser())
 app.use(logger(":method :url"))
 
-
+// Use import Router
 import routerAssets from "./routes/Assets.js";
 import routerAuths from "./routes/Auths.js";
 import routerRooms from "./routes/Rooms.js";

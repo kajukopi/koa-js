@@ -3,28 +3,28 @@ import Asset from "../models/Asset.js";
 export default {
     getAllAssets: async (ctx) => {
         const assets = await Asset.find({});
-        ctx.body = assets;
+        await ctx.render("assets", { assets })
     },
 
     createAsset: async (ctx) => {
         const newAsset = new Asset(ctx.request.body);
         await newAsset.save();
-        ctx.body = newAsset;
+        await ctx.render("assets", { asset: newAsset })
     },
 
     getAssetById: async (ctx) => {
         const asset = await Asset.findById(ctx.params.id);
-        ctx.body = asset;
+        await ctx.render("assets", { asset })
     },
 
     updateAsset: async (ctx) => {
         const updatedAsset = await Asset.findByIdAndUpdate(ctx.params.id, ctx.request.body, { new: true });
-        ctx.body = updatedAsset;
+        await ctx.render("assets", { asset: updatedAsset })
     },
 
     deleteAsset: async (ctx) => {
         await Asset.findByIdAndDelete(ctx.params.id);
-        ctx.status = 204;
+        await ctx.render("assets", { asset: "deleted" })
     },
 
 }

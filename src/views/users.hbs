@@ -1,3 +1,7 @@
 <div class="card">
-    <h1>Hello world</h1>
+    <ul class="list-unstyled">
+        {{#each users }}
+            <li>{{ this.name }}</li>
+        {{/each}}
+    </ul>
 </div>

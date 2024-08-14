@@ -3,27 +3,27 @@ import Auth from "../models/Auth.js";
 export default {
     getAllAuths: async (ctx) => {
         const auths = await Auth.find({});
-        ctx.body = auths;
+        await ctx.render("auths", { auths })
     },
 
     createAuth: async (ctx) => {
         const newAuth = new Auth(ctx.request.body);
         await newAuth.save();
-        ctx.body = newAuth;
+        await ctx.render("auths", { auth: newAuth })
     },
 
     getAuthById: async (ctx) => {
         const auth = await Auth.findById(ctx.params.id);
-        ctx.body = auth;
+        await ctx.render("auths", { auth })
     },
 
     updateAuth: async (ctx) => {
         const updatedAuth = await Auth.findByIdAndUpdate(ctx.params.id, ctx.request.body, { new: true });
-        ctx.body = updatedAuth;
+        await ctx.render("auths", { auth: updatedAuth })
     },
 
     deleteAuth: async (ctx) => {
         await Auth.findByIdAndDelete(ctx.params.id);
-        ctx.status = 204;
+        await ctx.render("auths", { auth: "deleted" })
     },
 }

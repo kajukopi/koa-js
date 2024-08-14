@@ -3,7 +3,7 @@
 import Router from "koa-router";
 import controllerUsers from "../controller/controllerUsers.js";
 
-const routerUsers = new Router({ prefix: '/assets' });
+const routerUsers = new Router({ prefix: '/users' });
 
 routerUsers.get('/', controllerUsers.getAllUsers);
 routerUsers.post('/', controllerUsers.createUser);

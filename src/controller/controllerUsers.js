@@ -3,27 +3,27 @@ import User from "../models/User.js";
 export default {
     getAllUsers: async (ctx) => {
         const users = await User.find({});
-        ctx.body = users;
+        await ctx.render("users", { users })
     },
 
     createUser: async (ctx) => {
         const newUser = new User(ctx.request.body);
         await newUser.save();
-        ctx.body = newUser;
+        await ctx.render("users", { user: newUser })
     },
 
     getUserById: async (ctx) => {
         const user = await User.findById(ctx.params.id);
-        ctx.body = user;
+        await ctx.render("users", { user })
     },
 
     updateUser: async (ctx) => {
         const updatedUser = await User.findByIdAndUpdate(ctx.params.id, ctx.request.body, { new: true });
-        ctx.body = updatedUser;
+        await ctx.render("users", { user: updatedUser })
     },
 
     deleteUser: async (ctx) => {
         await User.findByIdAndDelete(ctx.params.id);
-        ctx.status = 204;
+        await ctx.render("users", { user: "deleted" })
     },
 }

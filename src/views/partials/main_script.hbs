@@ -2,30 +2,49 @@
     try {
         const sidenav = document.getElementById("sidenav");
         const sidenavInstance = mdb.Sidenav.getInstance(sidenav, { slim: true, accordion: true });
-
         let innerWidth = null;
-
         const setMode = (e) => {
             // Check necessary for Android devices
             if (window.innerWidth === innerWidth) {
                 return;
             }
-
             innerWidth = window.innerWidth;
-
             if (window.innerWidth < 660) {
                 sidenavInstance.changeMode("over");
                 sidenavInstance.hide();
             } else {
                 sidenavInstance.changeMode("side");
-
                 sidenavInstance.show();
             }
         };
         setMode();
-        // Event listeners
         window.addEventListener("resize", setMode);
     } catch (error) {
         console.log("No sidebar");
+    }
+
+    try {
+        const dataColumns = [
+            {
+              label: 'Name',
+              field: 'name',
+            },
+            {
+              label: 'Description',
+              field: 'description',
+            },
+            
+        ]
+        const dataRows = [
+            
+        ]
+        const table = document.getElementById('table_editor');
+        const tableEditor = new TableEditor(table, { rows: dataRows, columns: dataColumns }, {
+            mode: 'modal',
+            entries: 5,
+            entriesOptions: [5, 10, 15]
+        })
+    } catch (error) {
+        console.log(error)
     }
 </script>

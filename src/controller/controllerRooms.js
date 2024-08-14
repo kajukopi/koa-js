@@ -3,28 +3,28 @@ import Room from "../models/Room.js";
 export default {
     getAllRooms: async (ctx) => {
         const rooms = await Room.find({});
-        await ctx.render("rooms", { rooms })
+        await ctx.render("rooms", { data: rooms, title: "Rooms" })
     },
 
     createRoom: async (ctx) => {
         const newRoom = new Room(ctx.request.body);
         await newRoom.save();
-        await ctx.render("rooms", { room: newRoom })
+        await ctx.render("rooms", { data: newRoom, title: "Rooms" })
     },
 
     getRoomById: async (ctx) => {
         const room = await Room.findById(ctx.params.id);
-        await ctx.render("rooms", { room })
+        await ctx.render("rooms", { data:room, title: "Rooms" })
     },
 
     updateRoom: async (ctx) => {
         const updatedRoom = await Room.findByIdAndUpdate(ctx.params.id, ctx.request.body, { new: true });
-        await ctx.render("rooms", { room: updatedRoom })
+        await ctx.render("rooms", { data: updatedRoom, title: "Rooms" })
     },
 
     deleteRoom: async (ctx) => {
         await Room.findByIdAndDelete(ctx.params.id);
-        await ctx.render("rooms", { room: "deleted" })
+        await ctx.render("rooms", { data: "deleted", title: "Rooms" })
     },
 
 }

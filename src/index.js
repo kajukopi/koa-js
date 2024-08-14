@@ -3,7 +3,7 @@ import app from "./app.js"
 import {createServer} from "http"
 config()
 const port = normalizePort(process.env.PORT || "3000")
-const server = createServer(app.callback()).listen(port)
+const server = createServer(app.callback())
 server.listen(port, "0.0.0.0")
 server.on("error", onError)
 server.on("listening", onListening)

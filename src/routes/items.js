@@ -3,9 +3,9 @@ import Item from "../models/Item.js"
 const router = new Router()
 
 // Define routes
-router.get("/items", async (ctx) => {
-  const items = await Item.find()
-  console.log(items)
+router.get("/items", async (ctx, next) => {
+  const items = await Item.find().lean()
+  console.log(items);
   await ctx.render("index", {items})
 })
 
@@ -24,19 +24,19 @@ router.post("/items", async (ctx) => {
   const newItem = new Item(ctx.request.body)
   const item = await newItem.save()
   console.log(item)
-  ctx.redirect("/")
+  ctx.redirect("/items")
 })
 
 router.put("/items/update/:id", async (ctx) => {
   const item = await Item.findByIdAndUpdate({_id: ctx.params.id}, ctx.request.body)
   console.log(item)
-  ctx.redirect("/")
+  ctx.redirect("/items")
 })
 
 router.get("/items/delete/:id", async (ctx) => {
   const item = await Item.findByIdAndDelete(ctx.params.id)
   console.log(item)
-  ctx.redirect("/")
+  ctx.redirect("/items")
 })
 
 export default router

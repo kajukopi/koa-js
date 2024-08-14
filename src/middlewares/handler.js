@@ -20,4 +20,16 @@ const validate = (schema) => (req, res, next) => {
   next()
 }
 
-module.exports = {authRouter, isAuthenticated, authorizeRole, validate}
+function logger(format) {
+  format = format || ':method ":url"'
+
+  return async function (ctx, next) {
+    const str = format.replace(":method", ctx.method).replace(":url", ctx.url)
+
+    console.log(str)
+
+    await next()
+  }
+}
+
+export {isAuthenticated, authorizeRole, validate, logger}

@@ -1,10 +1,12 @@
-import {Schema, model} from "mongoose"
-import {hash, compare} from "bcrypt"
+// src/models/user.js
+
+import { Schema, model } from "mongoose"
+import { hash, compare } from "bcrypt"
 
 const userSchema = new Schema({
-  username: {type: String, required: true, unique: true},
-  password: {type: String, required: true},
-  role: {type: String, enum: ["admin", "staff", "user"], default: "user"},
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  role: { type: String, enum: ["admin", "staff", "user"], default: "user" },
 })
 
 // Hash the password before saving the user

@@ -1,3 +1,5 @@
+// src/models/asset.js
+
 import { Schema, model } from "mongoose"
 
 const assetSchema = new Schema({

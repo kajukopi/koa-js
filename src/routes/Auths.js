@@ -1,3 +1,5 @@
+// src/routes/auths.js
+
 import Router from "koa-router";
 import controllerAuths from "../controller/controllerAuths.js";
 

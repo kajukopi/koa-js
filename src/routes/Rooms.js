@@ -1,3 +1,5 @@
+// src/routes/rooms.js
+
 import Router from "koa-router";
 import controllerRooms from "../controller/controllerRooms.js";
 

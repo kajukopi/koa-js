@@ -11,12 +11,12 @@ const authorizeRole = (role) => (req, res, next) => {
   if (req.session.role === role) {
     return next()
   }
-  res.status(403).render("error", {message: "Access denied"})
+  res.status(403).render("error", { message: "Access denied" })
 }
 
 const validate = (schema) => (req, res, next) => {
-  const {error} = schema.validate(req.body)
-  if (error) return res.status(400).render("error", {message: error.details[0].message})
+  const { error } = schema.validate(req.body)
+  if (error) return res.status(400).render("error", { message: error.details[0].message })
   next()
 }
 
@@ -32,4 +32,4 @@ function logger(format) {
   }
 }
 
-export {isAuthenticated, authorizeRole, validate, logger}
+export { isAuthenticated, authorizeRole, validate, logger }

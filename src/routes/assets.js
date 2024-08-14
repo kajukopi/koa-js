@@ -1,3 +1,5 @@
+// src/routes/assets.js
+
 import Router from "koa-router";
 import controllerAssets from "../controller/controllerAssets.js";
 

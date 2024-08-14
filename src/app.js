@@ -9,10 +9,12 @@ import render from "koa-hbs-renderer";
 import Handlebars from "handlebars";
 
 import { logger } from "./middlewares/handler.js"
-import routerItem from "./routes/items.js"
-import routerHome from "./routes/home.js"
-import routerAsset from "./routes/assets.js"
-import routerAuth from "./routes/auth.js"
+import routerAssets from "./routes/Assets.js"
+import routerInvoices from "./routes/Invoices.js"
+import routerReservations from "./routes/Reservations.js"
+import routerRooms from "./routes/Rooms.js"
+import routerServices from "./routes/Services.js"
+import routerUsers from "./routes/Users.js"
 
 
 config()
@@ -32,6 +34,7 @@ app.use(serve(path.join(__dirname, "..", 'assets'), {
   hidden: false,
   gzip: true,
 }));
+
 const options = {
   cacheExpires: 60,
   contentTag: 'content',
@@ -54,7 +57,11 @@ app.use(bodyParser())
 app.use(logger(":method :url"))
 
 // Use router middleware
-app.use(routerHome.routes()).use(routerHome.allowedMethods())
-app.use(routerItem.routes()).use(routerItem.allowedMethods())
+app.use(routerAssets.routes()).use(routerAssets.allowedMethods())
+app.use(routerRooms.routes()).use(routerRooms.allowedMethods())
+app.use(routerInvoices.routes()).use(routerInvoices.allowedMethods())
+app.use(routerReservations.routes()).use(routerReservations.allowedMethods())
+app.use(routerServices.routes()).use(routerServices.allowedMethods())
+app.use(routerUsers.routes()).use(routerUsers.allowedMethods())
 
 export default app

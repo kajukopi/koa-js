@@ -124,7 +124,7 @@ const Asset = require("../models/Asset")
 
 // Get all assets
 router.get("/", async (req, res) => {
-  const assets = await Asset.find().populate("room servicesUsed transfers")
+  const assets = await Asset.find().lean()
   res.json(assets)
 })
 
@@ -137,7 +137,7 @@ router.post("/", async (req, res) => {
 
 // Get a specific asset
 router.get("/:id", async (req, res) => {
-  const asset = await Asset.findById(req.params.id).populate("room servicesUsed transfers")
+  const asset = await Asset.findById(req.params.id)
   res.json(asset)
 })
 

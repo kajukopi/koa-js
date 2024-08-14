@@ -1,12 +1,16 @@
 import {config} from "dotenv"
 import app from "./app.js"
 import {createServer} from "http"
+
 config()
+
 const port = normalizePort(process.env.PORT || "3000")
 const server = createServer(app.callback())
+
 server.listen(port, "0.0.0.0")
 server.on("error", onError)
 server.on("listening", onListening)
+
 function normalizePort(val) {
   const port = parseInt(val, 10)
 
@@ -20,6 +24,7 @@ function normalizePort(val) {
 
   return false
 }
+
 function onError(error) {
   if (error.syscall !== "listen") {
     throw error
@@ -40,6 +45,7 @@ function onError(error) {
       throw error
   }
 }
+
 function onListening() {
   const addr = server.address()
   const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port

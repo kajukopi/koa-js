@@ -10,8 +10,6 @@ import Handlebars from "handlebars";
 
 import { logger } from "./middlewares/handler.js"
 
-
-
 config()
 
 // Initialize Koa application

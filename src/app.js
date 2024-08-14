@@ -49,6 +49,15 @@ app.use(render(options));
 app.use(bodyParser())
 app.use(logger(":method :url"))
 
+
+import routerAssets from "./routes/Assets.js";
+import routerAuths from "./routes/Auths.js";
+import routerRooms from "./routes/Rooms.js";
+import routerInvoices from "./routes/Invoices.js";
+import routerReservations from "./routes/Reservations.js";
+import routerServices from "./routes/Services.js";
+import routerUsers from "./routes/Users.js";
+
 // Use router middleware
 app.use(routerAssets.routes()).use(routerAssets.allowedMethods())
 app.use(routerAuths.routes()).use(routerAuths.allowedMethods())

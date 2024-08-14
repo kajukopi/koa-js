@@ -1,4 +1,4 @@
-import Router from "koa-routerUsers";
+import Router from "koa-router";
 import controllerUsers from "../controller/controllerUsers.js";
 
 const routerUsers = new Router({ prefix: '/assets' });

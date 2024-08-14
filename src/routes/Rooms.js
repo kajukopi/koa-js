@@ -1,4 +1,4 @@
-import Router from "koa-routerRooms";
+import Router from "koa-router";
 import controllerRooms from "../controller/controllerRooms.js";
 
 const routerRooms = new Router({ prefix: '/rooms' });

@@ -1,4 +1,4 @@
-import Router from "koa-routerInvoices";
+import Router from "koa-router";
 import controllerInvoices from "../controller/controllerInvoices.js";
 
 const routerInvoices = new Router({ prefix: '/invoices' });

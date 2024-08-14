@@ -1,4 +1,4 @@
-import Router from "koa-routerReservations";
+import Router from "koa-router";
 import controllerReservations from "../controller/controllerReservations.js";
 
 const routerReservations = new Router({ prefix: '/reservations' });

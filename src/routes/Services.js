@@ -1,4 +1,4 @@
-import Router from "koa-routerServices";
+import Router from "koa-router";
 import controllerServices from "../controller/controllerServices.js";
 
 const routerServices = new Router({ prefix: '/services' });

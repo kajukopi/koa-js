@@ -7,6 +7,6 @@ const assetSchema = new Schema({
   status: {type: String, enum: ["Working", "Needs Repair", "Replaced"], default: "Working"},
 })
 
-const Asset = model("Asset", assetSchema)
+const Reservation = model("Reservation", assetSchema)
 
-export default Asset
+export default Reservation

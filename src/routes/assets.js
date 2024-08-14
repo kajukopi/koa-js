@@ -1,4 +1,4 @@
-import Router from "koa-routerAssets";
+import Router from "koa-router";
 import controllerAssets from "../controller/controllerAssets.js";
 
 const routerAssets = new Router({ prefix: '/assets' });

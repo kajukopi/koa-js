@@ -1,0 +1,88 @@
+<!--Side Navbar-->
+<header>
+    <!-- Sidenav -->
+    <nav id="sidenav" class="sidenav"  data-mdb-color="dark" data-mdb-mode="side" data-mdb-hidden="false" data-mdb-scroll-container="#scrollContainer" data-mdb-content="#content">
+        <div class="mt-4">
+            <div id="header-content" class="ps-2">
+                <div id="name" style="white-space: nowrap; text-transform: uppercase"></div>
+                <div class="small text-muted" id="nik" style="text-transform: uppercase"></div>
+                <div class="small text-muted" id="email"></div>
+            </div>
+            <hr class="mb-0" />
+        </div>
+        <div id="scrollContainer">
+            <ul class="sidenav-menu">
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="/dashboard"> <i class="fa-duotone fa-gauge fa-fw me-3"></i>Dashboard</a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="/transfer"> <i class="fa-duotone fa-arrow-right-arrow-left fa-fw me-3"></i>Transfer</a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="/maintenance"> <i class="fa-duotone fa-screwdriver-wrench fa-fw me-3"></i>Service</a>
+                </li>
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="/maintenance"> <i class="fa-duotone fa-box fa-fw me-3"></i>Asset</a>
+                </li>
+            </ul>
+            <hr class="m-0" />
+            <ul class="sidenav-menu">
+                <li class="sidenav-item">
+                    <a class="sidenav-link" href="/privacy"> <i class="fa-duotone fa-shield-alt fa-fw me-3"></i>Privacy</a>
+                </li>
+                <li class="sidenav-item" id="button-signout">
+                    <a class="sidenav-link"> <i class="fa-duotone fa-user-astronaut fa-fw me-3"></i>Log out</a>
+                </li>
+            </ul>
+        </div>
+        <div class="text-center" style="height: 100px">
+            <hr class="mb-4 mt-0" />
+            <p class="small">PGS TPM Web App</p>
+        </div>
+    </nav>
+    <!-- Sidenav -->
+
+    <!-- Navbar -->
+    <nav id="content" class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+            <!-- Toggle button -->
+            <!-- Togglers -->
+            <div id="toggler">
+                <button data-mdb-toggle="sidenav" data-mdb-target="#sidenav" class="navbar-toggler d-lg-none" aria-controls="#sidenav" aria-haspopup="true">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <button id="slim-toggler" class="navbar-toggler d-lg-block d-none">
+                    <i class="fa-duotone fa-bars"></i>
+                </button>
+            </div>
+            <!-- Togglers -->
+
+            <!-- Brand -->
+            <a class="navbar-brand" href="/dashboard">
+                <!-- <img src="img/ico/favicon-32x32.png" height="25" alt="MDB Logo" loading="lazy" /> -->
+                <div class="fw-bold"><span class="text-primary">PGS</span> TPM - Dashboard</div>
+            </a>
+
+            <!-- Right links -->
+            <ul class="navbar-nav ms-auto d-flex flex-row">
+                <!-- Notification dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa-duotone fa-bell"></i>
+                        <span id="inbox-count" class=""></span>
+                    </a>
+                    <ul id="inbox-content" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                        <li>
+                            <a class="dropdown-item" href="#"></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+</header>
+<!--Side Navbar-->

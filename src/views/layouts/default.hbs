@@ -2,12 +2,22 @@
 <html lang="en">
 
     <head>
-        {{> meta}}
+        {{> meta }}
     </head>
 
-    <body>
+    <body style="background-color: #e8eaf6">
+        {{> bg }}
 
-        {{body}}
+        {{> header}}
+
+        <main id="content" style="margin-top: 58px">
+            <section class="container my-5 py-2">
+                {{{content}}}
+            </section>
+        </main>
+
+        {{> footer}}
     </body>
+
 
 </html>

@@ -9,12 +9,7 @@ import render from "koa-hbs-renderer";
 import Handlebars from "handlebars";
 
 import { logger } from "./middlewares/handler.js"
-import routerAssets from "./routes/Assets.js"
-import routerInvoices from "./routes/Invoices.js"
-import routerReservations from "./routes/Reservations.js"
-import routerRooms from "./routes/Rooms.js"
-import routerServices from "./routes/Services.js"
-import routerUsers from "./routes/Users.js"
+
 
 
 config()
@@ -58,6 +53,7 @@ app.use(logger(":method :url"))
 
 // Use router middleware
 app.use(routerAssets.routes()).use(routerAssets.allowedMethods())
+app.use(routerAuths.routes()).use(routerAuths.allowedMethods())
 app.use(routerRooms.routes()).use(routerRooms.allowedMethods())
 app.use(routerInvoices.routes()).use(routerInvoices.allowedMethods())
 app.use(routerReservations.routes()).use(routerReservations.allowedMethods())

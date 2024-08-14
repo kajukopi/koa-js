@@ -1,12 +1,12 @@
-import Router from "koa-router";
+import Router from "koa-routerAssets";
 import controllerAssets from "../controller/controllerAssets.js";
 
-const router = new Router({ prefix: '/assets' });
+const routerAssets = new Router({ prefix: '/assets' });
 
-router.get('/', controllerAssets.getAllAssets);
-router.post('/', controllerAssets.createAsset);
-router.get('/:id', controllerAssets.getAssetById);
-router.put('/:id', controllerAssets.updateAsset);
-router.delete('/:id', controllerAssets.deleteAsset);
+routerAssets.get('/', controllerAssets.getAllAssets);
+routerAssets.post('/', controllerAssets.createAsset);
+routerAssets.get('/:id', controllerAssets.getAssetById);
+routerAssets.put('/:id', controllerAssets.updateAsset);
+routerAssets.delete('/:id', controllerAssets.deleteAsset);
 
-export default router
+export default routerAssets

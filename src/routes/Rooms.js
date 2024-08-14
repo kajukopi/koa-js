@@ -1,12 +1,12 @@
-import Router from "koa-router";
+import Router from "koa-routerRooms";
 import controllerRooms from "../controller/controllerRooms.js";
 
-const router = new Router({ prefix: '/rooms' });
+const routerRooms = new Router({ prefix: '/rooms' });
 
-router.get('/', controllerRooms.getAllRooms);
-router.post('/', controllerRooms.createRoom);
-router.get('/:id', controllerRooms.getRoomById);
-router.put('/:id', controllerRooms.updateRoom);
-router.delete('/:id', controllerRooms.deleteRoom);
+routerRooms.get('/', controllerRooms.getAllRooms);
+routerRooms.post('/', controllerRooms.createRoom);
+routerRooms.get('/:id', controllerRooms.getRoomById);
+routerRooms.put('/:id', controllerRooms.updateRoom);
+routerRooms.delete('/:id', controllerRooms.deleteRoom);
 
-export default router
+export default routerRooms

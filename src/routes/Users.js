@@ -1,12 +1,12 @@
-import Router from "koa-router";
+import Router from "koa-routerUsers";
 import controllerUsers from "../controller/controllerUsers.js";
 
-const router = new Router({ prefix: '/assets' });
+const routerUsers = new Router({ prefix: '/assets' });
 
-router.get('/', controllerUsers.getAllUsers);
-router.post('/', controllerUsers.createUser);
-router.get('/:id', controllerUsers.getUserById);
-router.put('/:id', controllerUsers.updateUser);
-router.delete('/:id', controllerUsers.deleteUser);
+routerUsers.get('/', controllerUsers.getAllUsers);
+routerUsers.post('/', controllerUsers.createUser);
+routerUsers.get('/:id', controllerUsers.getUserById);
+routerUsers.put('/:id', controllerUsers.updateUser);
+routerUsers.delete('/:id', controllerUsers.deleteUser);
 
-export default router
+export default { routerUsers }

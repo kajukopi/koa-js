@@ -1,12 +1,12 @@
-import Router from "koa-router";
+import Router from "koa-routerServices";
 import controllerServices from "../controller/controllerServices.js";
 
-const router = new Router({ prefix: '/services' });
+const routerServices = new Router({ prefix: '/services' });
 
-router.get('/', controllerServices.getAllServices);
-router.post('/', controllerServices.createService);
-router.get('/:id', controllerServices.getServiceById);
-router.put('/:id', controllerServices.updateService);
-router.delete('/:id', controllerServices.deleteService);
+routerServices.get('/', controllerServices.getAllServices);
+routerServices.post('/', controllerServices.createService);
+routerServices.get('/:id', controllerServices.getServiceById);
+routerServices.put('/:id', controllerServices.updateService);
+routerServices.delete('/:id', controllerServices.deleteService);
 
-export default router
+export default routerServices

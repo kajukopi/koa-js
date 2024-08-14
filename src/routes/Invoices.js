@@ -1,12 +1,12 @@
-import Router from "koa-router";
+import Router from "koa-routerInvoices";
 import controllerInvoices from "../controller/controllerInvoices.js";
 
-const router = new Router({ prefix: '/invoices' });
+const routerInvoices = new Router({ prefix: '/invoices' });
 
-router.get('/', controllerInvoices.getAllInvoices);
-router.post('/', controllerInvoices.createInvoice);
-router.get('/:id', controllerInvoices.getInvoiceById);
-router.put('/:id', controllerInvoices.updateInvoice);
-router.delete('/:id', controllerInvoices.deleteInvoice);
+routerInvoices.get('/', controllerInvoices.getAllInvoices);
+routerInvoices.post('/', controllerInvoices.createInvoice);
+routerInvoices.get('/:id', controllerInvoices.getInvoiceById);
+routerInvoices.put('/:id', controllerInvoices.updateInvoice);
+routerInvoices.delete('/:id', controllerInvoices.deleteInvoice);
 
-export default router
+export default routerInvoices

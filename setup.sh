@@ -124,7 +124,7 @@ const Asset = require("../models/Asset")
 
 // Get all assets
 router.get("/", async (req, res) => {
-  const assets = await Asset.find().lean()
+  const assets = await Asset.find({}, '').lean()
   res.json(assets)
 })
 

@@ -2,7 +2,7 @@ import Auth from "../models/Auth.js";
 
 export default {
     getAllAuths: async (ctx) => {
-        const auths = await Auth.find({});
+        const auths = await Auth.find({}, '').lean();
         await ctx.render("auths", { data: auths, title: "Auth" })
     },
 

@@ -2,7 +2,7 @@ import Reservation from "../models/Reservation.js";
 
 export default {
     getAllReservations: async (ctx) => {
-        const reservations = await Reservation.find({});
+        const reservations = await Reservation.find({}, '').lean();
         await ctx.render("reservations", { data: reservations, title: "Reservations" })
     },
 

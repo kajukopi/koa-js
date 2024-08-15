@@ -195,7 +195,7 @@ import { User } from '../models';
 const router = new Router();
 
 router.get('/users', async (ctx) => {
-  const users = await User.find().lean();
+  const users = await User.find({}, '').lean();
   await ctx.render('users/index', { users });
 });
 

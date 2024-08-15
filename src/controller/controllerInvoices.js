@@ -2,7 +2,7 @@ import Invoice from "../models/Invoice.js";
 
 export default {
     getAllInvoices: async (ctx) => {
-        const invoices = await Invoice.find({});
+        const invoices = await Invoice.find({}, '').lean();
         await ctx.render("invoices", { data: invoices, title: "Invoices" })
     },
 

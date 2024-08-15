@@ -40,12 +40,36 @@ const options = {
     views: path.join(__dirname, 'views'),
     layouts: path.join(__dirname, "views", 'layouts'),
     partials: path.join(__dirname, "views", 'partials'),
+    // helpers: path.join(__dirname, "views", 'helpers'),
   },
   Promise: Promise
 }
+
+options.hbs.registerHelper("is", function (a, b, options) {
+  return (a === b) ? options.fn(this) : options.inverse(this);
+})
+options.hbs.registerHelper("uppercase", function (str) {
+  return str.toUpperCase();
+})
+
+
+
+options.hbs.registerHelper("editable", function (text) {
+  if (!text.indexOf('_')) return JSON.stringify(false)
+  return JSON.stringify(true)
+})
+
+
+options.hbs.registerHelper("formatDate", function (date, format) {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return new Date(date).toLocaleDateString('en-US', options);
+})
+
 app.use(render(options));
 app.use(bodyParser())
 app.use(logger(":method :url"))
+
+
 
 // Use import Router
 import routerAssets from "./routes/Assets.js";

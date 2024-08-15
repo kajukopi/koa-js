@@ -23,5 +23,4 @@ userSchema.methods.comparePassword = function (candidatePassword) {
 }
 
 const User = model("User", userSchema)
-
 export default User

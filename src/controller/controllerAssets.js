@@ -2,7 +2,7 @@ import Asset from "../models/Asset.js";
 
 export default {
     getAllAssets: async (ctx) => {
-        const assets = await Asset.find({});
+        const assets = await Asset.find({}, '').lean();
         await ctx.render("assets", { data: assets, title: "Assets" })
     },
 

@@ -2,7 +2,7 @@ import Room from "../models/Room.js";
 
 export default {
     getAllRooms: async (ctx) => {
-        const rooms = await Room.find({});
+        const rooms = await Room.find({}, '').lean();
         await ctx.render("rooms", { data: rooms, title: "Rooms" })
     },
 
@@ -14,7 +14,7 @@ export default {
 
     getRoomById: async (ctx) => {
         const room = await Room.findById(ctx.params.id);
-        await ctx.render("rooms", { data:room, title: "Rooms" })
+        await ctx.render("rooms", { data: room, title: "Rooms" })
     },
 
     updateRoom: async (ctx) => {

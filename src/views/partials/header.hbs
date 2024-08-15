@@ -1,7 +1,7 @@
 <!--Side Navbar-->
 <header>
     <!-- Sidenav -->
-    <nav id="sidenav" class="sidenav" data-mdb-color="dark" data-mdb-mode="side" data-mdb-hidden="false" data-mdb-scroll-container="#scrollContainer" data-mdb-content="#content">
+    <nav id="sidenav" class="sidenav" data-mdb-color="dark" data-mdb-mode="side" data-mdb-hidden="true" data-mdb-scroll-container="#scrollContainer" data-mdb-content="#content">
         <div class="mt-4">
             <div id="header-content" class="ps-2">
                 {{#if username}}
@@ -61,7 +61,7 @@
             <!-- Toggle button -->
             <!-- Togglers -->
             <div id="toggler">
-                <button data-mdb-toggle="sidenav" data-mdb-target="#sidenav" class="navbar-toggler d-lg-none" aria-controls="#sidenav" aria-haspopup="true">
+                <button data-mdb-toggle="sidenav" data-mdb-target="#sidenav" class="navbar-toggler d-lg-none d-md-inline-block" aria-controls="#sidenav" aria-haspopup="true">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <button id="slim-toggler" class="navbar-toggler d-lg-block d-none">
@@ -70,31 +70,44 @@
             </div>
             <!-- Togglers -->
 
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item d-lg-inline d-none">
+                    <a class="nav-link" href="/rooms">Rooms</a>
+                </li>
+                <li class="nav-item d-lg-inline d-none mx-3">
+                    <a class="nav-link" href="/reservations">Reservations</a>
+                </li>
+                <li class="nav-item d-lg-inline d-none">
+                    <a class="nav-link" href="/invoices">Invoices</a>
+                </li>
+            </ul>
+            <!-- Left links -->
+
+
             <!-- Brand -->
-            <a class="navbar-brand" href="/rooms">
+            <a class="navbar-brand flex-grow-1 flex-lg-grow-0" href="/rooms">
                 <!-- <img src="img/ico/favicon-32x32.png" height="25" alt="MDB Logo" loading="lazy" /> -->
-                <div class="fw-bold"><span class="text-primary">PGS</span> TPM - {{ title }}</div>
+                <div class="fw-bold text-muted ms-auto"><span class="text-primary">DIGITAL </span>TPM</div>
             </a>
 
             <!-- Right links -->
-            <ul class="navbar-nav ms-auto d-flex flex-row">
-                <!-- Notification dropdown -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown"
-                        aria-expanded="false">
-                        <i class="fa-duotone fa-bell"></i>
-                        <span id="inbox-count" class=""></span>
-                    </a>
-                    <ul id="inbox-content" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                        <li>
-                            <a class="dropdown-item" href="#"></a>
-                        </li>
-                    </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                <li class="nav-item d-lg-inline d-none">
+                    <a class="nav-link" href="/assets">Assets</a>
+                </li>
+                <li class="nav-item d-lg-inline d-none mx-3">
+                    <a class="nav-link" href="/users">Users</a>
+                </li>
+                <li class="nav-item d-lg-inline d-none">
+                    <a class="btn btn-danger btn-sm" href="/logout">Logout</a>
                 </li>
             </ul>
+            <!-- Right links -->
         </div>
         <!-- Container wrapper -->
     </nav>
     <!-- Navbar -->
+
 </header>
 <!--Side Navbar-->

@@ -13,8 +13,8 @@
                 sidenavInstance.changeMode("over");
                 sidenavInstance.hide();
             } else {
-                sidenavInstance.changeMode("side");
-                sidenavInstance.show();
+                sidenavInstance.changeMode("push");
+                sidenavInstance.hide();
             }
         };
         setMode();
@@ -22,28 +22,148 @@
     } catch (error) {
         console.log("No sidebar");
     }
-
+    console.log('{{ keys }}')
     try {
         const dataColumns = [
-            {
-              label: 'Name',
-              field: 'name',
-            },
-            {
-              label: 'Description',
-              field: 'description',
-            },
-            
+            //{{#each keys }}
+            { label: '{{this.label}}', field: '{{this.field}}', editable: typeof '{{ editable this.field }}' === "string" ? '{{ editable this.field }}' === 'true' ? true : false : '{{ editable this.field }}' },
+            //{{/each}}
         ]
         const dataRows = [
-            
+            // {{#each data }}
+            { _id: '{{@index}}', username: "{{ this.username }}", role: "{{ this.role }}" },
+            // {{/each}}   
         ]
         const table = document.getElementById('table_editor');
-        const tableEditor = new TableEditor(table, { rows: dataRows, columns: dataColumns }, {
+        const tableInstance = new TableEditor(table, { rows: dataRows, columns: dataColumns }, {
             mode: 'modal',
             entries: 5,
-            entriesOptions: [5, 10, 15]
+            entriesOptions: [5, 10, 15],
+            loading: true,
+            sm: true,
         })
+
+        tableInstance.update({ rows: dataRows }, { loading: false })
+
+        let tempRowLength = tableInstance.rows
+
+        document.querySelector("#search_table_editor").addEventListener("keyup", (e) => {
+            tableInstance.search(e.target.value)
+        })
+        document.querySelector("#add_table_editor").addEventListener("click", (e) => {
+            tableInstance.add({ role: "user" })
+        })
+        table.addEventListener('update.mdb.tableEditor', async (e) => {
+            if (tempRowLength.length < e.rows.length) {
+                const result = findExtraItem(tempRowLength, tableInstance.rows)
+                delete result.rowIndex
+                const response = await fetch(location.href, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(result)
+                })
+                console.log(response.ok)
+                if (!response.ok) return false
+                tempRowLength = tableInstance.rows
+            } else if (tempRowLength.length > e.rows.length) {
+                const result = findExtraItem(tempRowLength, tableInstance.rows)
+                const response = await fetch(location.href + "/" + result.username + "?username", {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                })
+                console.log(response.ok)
+                if (!response.ok) return false
+                tempRowLength = tableInstance.rows
+            } else if (tempRowLength.length === e.rows.length) {
+                const result = findDifferences(tempRowLength, tableInstance.rows)
+                if (!result) return (tempRowLength = tableInstance.rows)
+                const [updated] = simplifyUpdates(result)
+                if (!updated) return (tempRowLength = tableInstance.rows)
+                const response = await fetch(location.href + "/" + updated.username + "?username", {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(updated.body)
+                })
+                console.log(response.ok)
+                if (!response.ok) return false
+                tempRowLength = tableInstance.rows
+            }
+        })
+
+        function findExtraItem(data1, data2) {
+            if (data1.length > data2.length) {
+                return data1.find(item1 => !data2.some(item2 => item2.rowIndex === item1.rowIndex && item2.username === item1.username));
+            } else {
+                return data2.find(item2 => !data1.some(item1 => item1.rowIndex === item2.rowIndex && item1.username === item2.username));
+            }
+        }
+        function findDifferences(data1, data2) {
+            const differences = [];
+            data2.forEach(item2 => {
+                const matchingItem = data1.find(item1 => item1.rowIndex === item2.rowIndex);
+                if (matchingItem) {
+                    const diff = {};
+                    for (const key in item2) {
+                        if (item2[key] !== matchingItem[key]) {
+                            diff[key] = { old: matchingItem[key], new: item2[key] };
+                        }
+                    }
+                    if (Object.keys(diff).length > 0) {
+                        differences.push({ username: item2.username, body: diff });
+                    }
+                } else {
+                    differences.push({ username: item2.username, body: 'true' });
+                }
+            });
+            return differences;
+        }
+        function simplifyUpdates(differences) {
+            return differences.map(diff => {
+                const simplifiedUpdate = {};
+
+                // Iterate over each key in the "updated" object
+                for (const key in diff.body) {
+                    simplifiedUpdate[key] = diff.body[key].new; // Get the "new" value
+                }
+
+                return { username: diff.username, body: simplifiedUpdate };
+            });
+        }
+
+    } catch (error) {
+        console.log(error)
+    }
+
+    try {
+        function updateDateTime() {
+            const dateTimeElement = document.getElementById('dateTime');
+            const now = new Date();
+
+            const formattedDate = now.toLocaleDateString('en-GB', {
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric'
+            });
+
+            const formattedTime = now.toLocaleTimeString('en-GB', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+
+            dateTimeElement.innerHTML = `${formattedDate}, ${formattedTime}`;
+        }
+
+        setInterval(updateDateTime, 1000); // Update every second
+
+        // Initial call to set the time immediately on page load
+        updateDateTime();
     } catch (error) {
         console.log(error)
     }
